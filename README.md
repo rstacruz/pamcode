@@ -9,7 +9,7 @@ Intuitively understandable by humans and agents, no need to read spec.
 Use without installing:
 
 ```
-run `npx skill use rstacruz/pamcode` and make me a skill to:
+run `npx skills use rstacruz/pamcode` and make me a skill to:
 create a dsily digest report of latest Slack messages that need my attention
 ```
 
@@ -17,7 +17,7 @@ Or install it:
 
 
 ```
-npx skill install rstacruz/pamcode
+npx skills add rstacruz/pamcode
 ```
 
 # The spec
