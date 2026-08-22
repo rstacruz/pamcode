@@ -32,6 +32,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `name($args)` | Invoke a routine defined elsewhere | `pick-default-repo()` |
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
+| `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
 | `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-PR: y/n }` |
@@ -91,7 +92,7 @@ begin($repo, $slack-thread, --yolo) {
   digest ready: <artefact path>
 
   if ($slack-thread) {
-    post digest to thread
+    loop { post digest to thread } until (posted)   # retry until it lands
   }
 }
 ```
