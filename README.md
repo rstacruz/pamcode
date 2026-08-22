@@ -84,7 +84,7 @@ begin($repo, --draft) {
   # -- phase 1: gather --
   $changes = fetch-changes($repo)              # def returns a structured result
 
-  if ($changes is empty) {
+  if (there are no changes) {
     return "nothing new"                       # plain value; ends the run
   } else {
     # -- phase 2: draft --
