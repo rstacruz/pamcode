@@ -5,11 +5,11 @@ description: tbd
 
 # Pamcode
 
+**Pamcode = Pseudocode for agents in Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
+
+Intuitively understandable by humans and agents, no need to read spec.
+
 <!-- spec-start -->
-
-**Pamcode = Pseudocode Agent Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
-
-- Intuitively understandable by humans and agents, no need to read spec
 
 ## Markdown shell
 
@@ -98,11 +98,6 @@ begin($repo, $slack-thread, --yolo) {
 }
 ```
 
-## Guidelines
-
-- Run at most once per week per repo; never re-digest a week already reported.
-- Digest window is fixed at 7 days; don't backfill older weeks.
-
 ### pick-default-repo()
 
 - Prefer `$repo` when set, else default to `rsc/dotfiles`
@@ -114,11 +109,16 @@ def pick-default-repo() {
   return { repo: 'rsc/dotfiles', effort: L1, multi-PR: n }
 }
 ```
+
+## Guidelines
+
+- Run at most once per week per repo; never re-digest a week already reported.
+- Digest window is fixed at 7 days; don't backfill older weeks.
+
 ````
 
 ## Conventions
 
-- Subagent bodies are instructions, not calls: prose or slash commands for the spawned agent.
 - Structured returns only where a caller consumes them.
 - Keep it skimmable. Read by agents and humans; one glance shows phases and gates.
 
