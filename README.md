@@ -1,4 +1,12 @@
-# Pamcode
+<div align='center' class='hidden'>
+  <br/>
+  <br/>
+  <h1>pamcode</h1>
+  <p>a spec for pseudocode for agentic workflows</p>
+  <br/>
+  <br/>
+  <br/>
+</div>
 
 **Pamcode = Pseudocode for agents in Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
 
