@@ -21,6 +21,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `## Skill dependencies` | Other skills to read first, as `/path` links |
 | `## Workflow` | The `begin()` pseudocode in a code fence |
 | `### <name>()` | One per subroutine: prose instructions or a `def` block |
+| `## Guidelines` | General guidance for writing the skill |
 
 ## Constructs
 
@@ -40,7 +41,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 
 Values are loose: strings, numbers, effort levels (`L1`–`L5`), `y/n`, or prose.
 
-## Kitchen sink example
+## Example
 
 Every shell section and construct, annotated:
 
@@ -97,7 +98,16 @@ begin($repo, $slack-thread, --yolo) {
 }
 ```
 
+## Guidelines
+
+- Run at most once per week per repo; never re-digest a week already reported.
+- Digest window is fixed at 7 days; don't backfill older weeks.
+
 ### pick-default-repo()
+
+- Prefer `$repo` when set, else default to `rsc/dotfiles`
+- Single-repo digest: `multi-PR: n`
+- Quick lookup, effort `L1`
 
 ```
 def pick-default-repo() {
