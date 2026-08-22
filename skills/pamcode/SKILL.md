@@ -29,16 +29,16 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 |---|---|---|
 | `begin($args) { … }` | Workflow entry point | `begin($request) {` |
 | `def name($args) { … }` | Subroutine, usually returning a structured result | `def plan($request) {` |
-| name($args) | Invoke a routine defined elsewhere | fetch-changes() |
+| `name($args)` | Invoke a routine defined elsewhere | `fetch-changes()` |
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
-| `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-pr: true }` |
+| `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
-| plain prose | A step described in words | `save the draft to $digest-path` |
+| plain prose | A step described in words | `post the draft to the thread for review` |
 
 ## Example
 
@@ -66,23 +66,18 @@ Read first:
 
 ```
 begin($repo, --draft) {
-  # -- phase 1: scope --
-  if ($repo == '') {
-    use the current repo                       # prose fallback
-  }
-
-  # -- phase 2: gather --
+  # -- phase 1: gather --
   $changes = fetch-changes($repo)              # def returns a structured result
 
-  if ($changes.count == 0) {
+  if ($changes is empty) {
     return "nothing new"                       # plain value; ends the run
   } else {
-    # -- phase 3: draft --
+    # -- phase 2: draft --
     subagent(small) {                          # fork a subagent; body = its job
       group $changes into themes, one section per theme
     }
     /format-prose()                            # invoke another skill
-    save the draft to $digest-path
+    $digest-path = save-draft()                # keep the returned path
   }
 
   if (--draft) {                               # flag alters flow
@@ -90,7 +85,7 @@ begin($repo, --draft) {
     return { posted: false }                   # draft only; nothing published
   }
 
-  # -- phase 4: publish --
+  # -- phase 3: publish --
   loop { post digest to thread } until (posted)   # retry until it lands
   return { posted: true, digest-path: $digest-path }
 }
@@ -103,7 +98,17 @@ begin($repo, --draft) {
 
 ```
 def fetch-changes($repo) {
-  return { commits: [...], prs: [...], count: n }
+  return { commits: [...], prs: [...] }
+}
+```
+
+### save-draft()
+
+- Write the draft to a file and return its path.
+
+```
+def save-draft() {
+  return <path>
 }
 ```
 
