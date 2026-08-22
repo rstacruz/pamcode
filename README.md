@@ -41,12 +41,11 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 |---|---|---|
 | `begin($args) { … }` | Workflow entry point | `begin($request) {` |
 | `def name($args) { … }` | Subroutine, usually returning a structured result | `def plan($request) {` |
+| `name($args)` | Invoke a routine defined elsewhere | `pick-default-repo()` |
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
-| `notify(…)` | Fire-and-forget output to Slack/chat/thread | `notify(PR created, planning now)` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
-| `confirm-with-user("…")` | Pause for human approval (skipped with `--yolo`) | `confirm-with-user("Ready?")` |
 | `return { field, field: y/n }` | Structured result passed up | `return { plan-file, multi-PR: y/n }` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
@@ -94,7 +93,6 @@ begin($repo, $slack-thread, --yolo) {
 
   if (changes-are-trivial) {
     answer now                           # prose is a valid statement
-    notify(Short summary, no artefacts)
   } else {
     /polish-plan()                       # invoke another skill
     confirm-with-user("Ready to write the report?")
@@ -104,10 +102,10 @@ begin($repo, $slack-thread, --yolo) {
   subagent(small) {
     draft digest in /skimmable format
   }
-  notify(Digest ready: <artefact path>)
+  digest ready: <artefact path>
 
   if ($slack-thread) {
-    notify(Post digest to thread)        # side-channel, not return value
+    post digest to thread
   }
 }
 ```
