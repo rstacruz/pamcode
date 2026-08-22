@@ -35,12 +35,12 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
-| `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-PR: y/n }` |
+| `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-PR: true }` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `save the draft to $digest-path` |
 
-Values are loose: strings, numbers, effort levels (`L1`–`L5`), `y/n`, or prose.
+Values are loose: strings, numbers, effort levels (`L1`–`L5`), `true/false`, or prose.
 
 ## Example
 
@@ -89,12 +89,12 @@ begin($repo, --draft) {
 
   if (--draft) {                               # flag alters flow
     post the draft to the thread for review
-    return { posted: n }                       # draft only; nothing published
+    return { posted: false }                   # draft only; nothing published
   }
 
   # -- phase 4: publish --
   loop { post digest to thread } until (posted)   # retry until it lands
-  return { posted: y, digest-path: $digest-path }
+  return { posted: true, digest-path: $digest-path }
 }
 ```
 
