@@ -2,8 +2,6 @@
 
 **Pamcode = Pseudocode Agent Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
 
-**Pamcode is not a language.** No parser; code-like shapes give structure, but prose is always valid. Every shape below appears in real skills (`x-hello`, `x-implement`).
-
 ## Markdown shell
 
 Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `###` sections.
