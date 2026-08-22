@@ -96,7 +96,7 @@ Read first:
 
 ## Workflow
 
-```
+```pseudocode
 begin($repo, { --draft }) {
   # -- phase 1: gather --
   $changes = fetch-changes($repo)
@@ -133,7 +133,7 @@ begin($repo, { --draft }) {
 - List commits and merged PRs since the last digest, newest first.
 - Skip WIP branches and bot commits.
 
-```
+```pseudocode
 def fetch-changes($repo) {
   return { commits: [...], prs: [...] }
 }
@@ -141,13 +141,7 @@ def fetch-changes($repo) {
 
 ### save-draft()
 
-- Write the draft to a file and return its path.
-
-```
-def save-draft() {
-  return <path>
-}
-```
+Write the draft to a file and return its path.
 
 ## Guidelines
 
