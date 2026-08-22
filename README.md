@@ -143,8 +143,8 @@ def save-draft() {
 
 ## Conventions
 
-- These are suggestions, not strict rules. Deviate if it brings more clarity.
-- Keep it skimmable. Optimise to be read by agents and humans.
+- Structured returns only where a caller consumes them.
+- Keep it skimmable. Read by agents and humans; one glance shows phases and gates.
 
 <!-- spec-end -->
 
