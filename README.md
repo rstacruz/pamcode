@@ -76,6 +76,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `begin($args) { … }` | Workflow entry point | `begin($request) {` |
 | `def name($args) { … }` | Subroutine, usually returning a structured result | `def plan($request) {` |
 | `name($args)` | Invoke a routine defined elsewhere | `fetch-changes()` |
+| `` `cmd` `` | Run a shell command; yields its stdout | `` `$out = `git log --oneline` `` `` |
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
@@ -151,7 +152,8 @@ begin($repo, { --draft }) {
 
 ```pseudocode
 def fetch-changes($repo) {
-  return { commits: [...], prs: [...] }
+  $commits = `git log --oneline`
+  return { commits: $commits, prs: [...] }
 }
 ```
 
@@ -170,6 +172,7 @@ Write the draft to a file and return its path.
 
 - These are suggestions, not strict rules. Deviate if it brings more clarity.
 - Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
+- Prefer prose for intent; reach for backticks when the exact command matters. Inside a command, `$var` is pamcode state, not a shell variable; use `$(…)` for substitution. Failures compose with conditions: `if (`npm test` fails) { … }`.
 - Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
