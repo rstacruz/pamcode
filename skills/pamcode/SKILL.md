@@ -35,7 +35,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
-| `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-PR: true }` |
+| `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-pr: true }` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `save the draft to $digest-path` |
