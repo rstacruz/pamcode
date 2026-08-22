@@ -21,6 +21,12 @@ Or install it:
 npx skills add rstacruz/pamcode
 ```
 
+## Examples
+
+- [Example: daily digest](#example)
+- [Example: autofix PRs](https://github.com/rstacruz/agentic-toolkit/blob/main/skills/atk-pr-autofix/SKILL.md)
+- ...more to come
+
 # The spec
 
 <!-- Don't edit directly; use "just sync" to update below to keep in sync with skill file -->
