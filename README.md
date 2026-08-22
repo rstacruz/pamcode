@@ -11,7 +11,7 @@ Use without installing:
 
 ```
 run `npx skills use rstacruz/pamcode` and make me a skill to:
-create a dsily digest report of latest Slack messages that need my attention
+create a daily digest report of latest Slack messages that need my attention
 ```
 
 Or install it:
