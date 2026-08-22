@@ -2,7 +2,8 @@
 
 **Pamcode = Pseudocode for agents in Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
 
-Intuitively understandable by humans and agents, no need to read spec.
+- Intuitively understandable by humans and agents, no need to read spec
+- Token-efficient way to write agent workflows
 
 ## Usage
 
