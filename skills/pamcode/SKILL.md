@@ -40,8 +40,6 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `save the draft to $digest-path` |
 
-Values are loose: strings, numbers, effort levels (`L1`–`L5`), `true/false`, or prose.
-
 ## Example
 
 Every shell section and construct, annotated. The skill below is a teaching
