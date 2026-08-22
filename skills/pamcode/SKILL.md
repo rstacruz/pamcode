@@ -1,6 +1,6 @@
 ---
 name: pamcode
-description: tbd
+description: Specifies the pamcode format — pseudocode in Markdown for describing agent workflows. Use when authoring or editing SKILL.md files that define agent workflows, when interpreting `begin()`/`def()` pseudocode in a skill, or when writing a skill spec in pamcode.
 ---
 
 # Pamcode
