@@ -69,6 +69,7 @@ Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
 | `### <name>()` | One per subroutine: prose instructions and/or a `def` block |
 | `## Guidelines` | General guidance for writing the skill |
 
+
 ## Constructs
 
 | Construct | Meaning | Example |
@@ -174,9 +175,9 @@ Write the draft to a file and return its path.
 ## Conventions
 
 - These are suggestions, not strict rules. Deviate if it brings more clarity.
+- Add or remove sections as needed. Some information may be best expressed outside of Pamcode conventions.
 - Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
-- Prefer prose for intent; reach for backticks when the exact command matters. Inside a command, `$var` is pamcode state, not a shell variable; use `$(…)` for substitution. Failures compose with conditions: `if (`npm test` fails) { … }`.
-- Use `return { ok: false }` when a caller may handle the failure; `abort` when the workflow cannot continue. Make reasons specific: `abort "couldn't post after 3 tries"`, not `abort "error"`.
+- Prefer prose for describing intent.
 - Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
