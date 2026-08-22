@@ -8,7 +8,7 @@
   <br/>
 </div>
 
-Look... you totally can talk to agents in pseudocode. Just paste this into Claude Code:
+Look... you totally can talk to agents in pseudocode. Just paste this into Claude Code. Agents will figure it out.
 
 ```
 loop (3 times) {
@@ -26,11 +26,11 @@ How about we write our skills in the same way?
 - Token-efficient way to write agent workflows
 - Write skills in a way that can be code reviewed by agents
 
-**Pamcode = Pseudocode for agents in Markdown.** It's informal pseudocode for describing agent workflows in `SKILL.md` files.
+**Pamcode = Pseudocode for agents in Markdown.** It's loosely-defined pseudocode grammar for describing agent workflows in `SKILL.md` files. Writing or editing a skill? Point your agent to the [pamcode spec](./skills/pamcode/SKILL.md).
 
 ## Usage
 
-Writing or editing a skill? Point your agent to the [pamcode spec](./skills/pamcode/SKILL.md). Use without installing:
+Use without installing:
 
 ```
 run `npx skills use rstacruz/pamcode` and make me a skill to:
