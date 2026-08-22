@@ -48,6 +48,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
+| `loop { … }` | Repeat body until `break` | `loop { if ($tries == 3) { break } }` |
 | `break` | Exit the loop early | `if ($tries == 3) { break }` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
@@ -108,7 +109,7 @@ begin($repo, { --draft }) {
     post digest to thread
     if ($tries == 3) { break }
   } until (posted)
-  return { posted: posted, digest-path: $digest-path }   # may be false after break
+  return { posted, digest-path: $digest-path }
 }
 ```
 
@@ -142,8 +143,8 @@ def save-draft() {
 
 ## Conventions
 
-- Structured returns only where a caller consumes them.
-- Keep it skimmable. Read by agents and humans; one glance shows phases and gates.
+- These are suggestions, not strict rules. Deviate if it brings more clarity.
+- Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
 
