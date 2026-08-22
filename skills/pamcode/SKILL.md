@@ -66,8 +66,6 @@ Read first:
 ## Workflow
 
 ```
-# -- weekly digest: pick a repo, review the week, report --
-
 begin($repo, $slack-thread, --yolo) {
   # -- phase 1: scope --
   if ($repo == '') {
