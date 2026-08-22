@@ -106,9 +106,7 @@ begin($repo, { --draft }) {
   loop {
     $tries = $tries + 1
     post digest to thread
-    if ($tries == 3) {
-      break                              # give up after 3 tries
-    }
+    if ($tries == 3) { break }
   } until (posted)
   return { posted: true, digest-path: $digest-path }
 }
