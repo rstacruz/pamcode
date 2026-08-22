@@ -5,21 +5,19 @@ description: Specifies the pamcode format — pseudocode in Markdown for describ
 
 # Pamcode
 
-**Pamcode = Pseudocode for agents in Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
-
-Intuitively understandable by humans and agents, no need to read spec.
+**Pamcode = Pseudocode for agents in Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files — intuitive for humans and agents, no spec required.
 
 <!-- spec-start -->
 
 ## Markdown shell
 
-Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `###` sections.
+Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
 
 | Section | Role |
 |---|---|
 | `## Input` | The `$var`s and `--flags` accepted |
 | `## Skill dependencies` | Other skills to read first, as `/path` links |
-| `## Workflow` | The `begin()` pseudocode in a code fence |
+| `## Workflow` | The `begin()` pseudocode in a `pseudocode` code fence |
 | `### <name>()` | One per subroutine: prose instructions and/or a `def` block |
 | `## Guidelines` | General guidance for writing the skill |
 
@@ -30,7 +28,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `begin($args) { … }` | Workflow entry point | `begin($request) {` |
 | `def name($args) { … }` | Subroutine, usually returning a structured result | `def plan($request) {` |
 | `name($args)` | Invoke a routine defined elsewhere | `fetch-changes()` |
-| `` `cmd` `` | Run a shell command; yields its stdout | `` `$out = `git log --oneline` `` `` |
+| `` `cmd` `` | Run a shell command; yields its stdout | `` `git log --oneline` `` |
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
@@ -46,13 +44,13 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 
 ## Example
 
-Every shell section and construct, annotated. The skill below is a teaching
-example — it shows every construct; it is not meant to be run.
+Every skill section and construct, annotated. The skill below is a teaching
+example — it demonstrates most constructs; it is not meant to be run.
 
 ````markdown
 ---
 name: daily-digest
-description: Teaching example — demonstrates every pamcode construct; not a runnable skill.
+description: Teaching example — demonstrates most pamcode constructs; not a runnable skill.
 ---
 
 ## Input
@@ -75,14 +73,14 @@ begin($repo, { --draft }) {
 
   if (there are no changes) {
     return "nothing new"
-  } else {
-    # -- phase 2: draft --
-    subagent(small) {
-      group $changes into themes, one section per theme
-    }
-    /format-prose()
-    $digest-path = save-draft()
   }
+
+  # -- phase 2: draft --
+  subagent(small) {
+    group $changes into themes, one section per theme
+  }
+  /format-prose()
+  $digest-path = save-draft()
 
   if (--draft) {
     post the draft to the thread for review
