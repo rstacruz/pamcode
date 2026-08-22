@@ -8,15 +8,31 @@
   <br/>
 </div>
 
-**Pamcode = Pseudocode for agents in Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
+## What? Why?
 
-- Intuitively understandable by humans and agents, no need to read spec
+Look... you totally can talk to agents in pseudocode. Just paste this into Claude Code:
+
+```
+loop (3 times) {
+  parallel {
+    subagent { evaluate this PR for simplification opportunities }
+    subagent { review this PR for bugs }
+  }
+  triage feedback
+}
+```
+
+How about we write our skills in the same way?
+
+- Intuitively understandable by humans and agents
 - Token-efficient way to write agent workflows
 - Write skills in a way that can be code reviewed by agents
 
+**Pamcode = Pseudocode for agents in Markdown.** It's informal pseudocode for describing agent workflows in `SKILL.md` files.
+
 ## Usage
 
-Use without installing:
+Writing or editing a skill? Point your agent to the [pamcode spec](./skills/pamcode/SKILL.md). Use without installing:
 
 ```
 run `npx skills use rstacruz/pamcode` and make me a skill to:
