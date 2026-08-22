@@ -48,6 +48,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `$var` | Parameter or state | `$request` |
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
+| `break` | Exit the loop early | `if ($tries == 3) { break }` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
 | `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
@@ -101,7 +102,14 @@ begin($repo, { --draft }) {
   }
 
   # -- phase 3: publish --
-  loop { post digest to thread } until (posted)   # retry until it lands
+  $tries = 0
+  loop {
+    $tries = $tries + 1
+    post digest to thread
+    if ($tries == 3) {
+      break                              # give up after 3 tries
+    }
+  } until (posted)
   return { posted: true, digest-path: $digest-path }
 }
 ```
