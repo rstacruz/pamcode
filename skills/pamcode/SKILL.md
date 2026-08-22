@@ -39,6 +39,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
 | `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
+| `abort "reason"` | Stop the workflow with a failure reason | `abort "couldn't post after 3 tries"` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `post the draft to the thread for review` |
@@ -95,6 +96,8 @@ begin($repo, { --draft }) {
     post digest to thread
     if ($tries == 3) { break }
   } until (posted)
+
+  if (not posted) { abort "couldn't post after 3 tries" }
   return { posted, digest-path: $digest-path }
 }
 ```
@@ -127,6 +130,7 @@ Write the draft to a file and return its path.
 - These are suggestions, not strict rules. Deviate if it brings more clarity.
 - Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
 - Prefer prose for intent; reach for backticks when the exact command matters. Inside a command, `$var` is pamcode state, not a shell variable; use `$(…)` for substitution. Failures compose with conditions: `if (`npm test` fails) { … }`.
+- Use `return { ok: false }` when a caller may handle the failure; `abort` when the workflow cannot continue. Make reasons specific: `abort "couldn't post after 3 tries"`, not `abort "error"`.
 - Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
