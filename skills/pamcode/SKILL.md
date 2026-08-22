@@ -33,7 +33,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
-| `return { field, field: y/n }` | Structured result passed up | `return { plan-file, multi-PR: y/n }` |
+| `return { field: value, ... }` | Structured result passed up | `return { plan-file: <path>, multi-PR: y/n }` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `answer now` |
