@@ -1,23 +1,10 @@
+---
+name: pamcode
+description: tbd
+---
+
 # Pamcode
-## Usage
 
-Use without installing:
-
-```
-run `npx skill use rstacruz/pamcode` and make me a skill to:
-create a dsily digest report of latest Slack messages that need my attention
-```
-
-Or install it:
-
-
-```
-npx skill install rstacruz/pamcode
-```
-
-## The spec
-
-<!-- Don't edit directly; use "just sync" to update below to keep in sync with skill file -->
 <!-- spec-start -->
 
 **Pamcode = Pseudocode Agent Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
@@ -128,7 +115,3 @@ def pick-default-repo() {
 - Keep it skimmable. Read by agents and humans; one glance shows phases and gates.
 
 <!-- spec-end -->
-
-## Thanks
-
-2026
