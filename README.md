@@ -12,6 +12,7 @@
 
 - Intuitively understandable by humans and agents, no need to read spec
 - Token-efficient way to write agent workflows
+- Write skills in a way that can be code reviewed by agents
 
 ## Usage
 
@@ -19,7 +20,7 @@ Use without installing:
 
 ```
 run `npx skills use rstacruz/pamcode` and make me a skill to:
-create a daily digest report of latest Slack messages that need my attention
+create a daily digest report of latest Slack messages
 ```
 
 Or install it:
@@ -98,22 +99,22 @@ Read first:
 ```
 begin($repo, { --draft }) {
   # -- phase 1: gather --
-  $changes = fetch-changes($repo)              # def returns a structured result
+  $changes = fetch-changes($repo)
 
   if (there are no changes) {
-    return "nothing new"                       # plain value; ends the run
+    return "nothing new"
   } else {
     # -- phase 2: draft --
-    subagent(small) {                          # fork a subagent; body = its job
+    subagent(small) {
       group $changes into themes, one section per theme
     }
-    /format-prose()                            # invoke another skill
-    $digest-path = save-draft()                # keep the returned path
+    /format-prose()
+    $digest-path = save-draft()
   }
 
-  if (--draft) {                               # flag alters flow
+  if (--draft) {
     post the draft to the thread for review
-    return { posted: false }                   # draft only; nothing published
+    return { posted: false }
   }
 
   # -- phase 3: publish --
@@ -157,8 +158,8 @@ def save-draft() {
 
 ## Conventions
 
-- Structured returns only where a caller consumes them.
-- Keep it skimmable. Read by agents and humans; one glance shows phases and gates.
+- These are suggestions, not strict rules. Deviate if it brings more clarity.
+- Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
 

@@ -69,22 +69,22 @@ Read first:
 ```
 begin($repo, { --draft }) {
   # -- phase 1: gather --
-  $changes = fetch-changes($repo)              # def returns a structured result
+  $changes = fetch-changes($repo)
 
   if (there are no changes) {
-    return "nothing new"                       # plain value; ends the run
+    return "nothing new"
   } else {
     # -- phase 2: draft --
-    subagent(small) {                          # fork a subagent; body = its job
+    subagent(small) {
       group $changes into themes, one section per theme
     }
-    /format-prose()                            # invoke another skill
-    $digest-path = save-draft()                # keep the returned path
+    /format-prose()
+    $digest-path = save-draft()
   }
 
-  if (--draft) {                               # flag alters flow
+  if (--draft) {
     post the draft to the thread for review
-    return { posted: false }                   # draft only; nothing published
+    return { posted: false }
   }
 
   # -- phase 3: publish --
