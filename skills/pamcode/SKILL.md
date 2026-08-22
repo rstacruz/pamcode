@@ -65,7 +65,7 @@ Read first:
 ## Workflow
 
 ```
-begin($repo, --draft) {
+begin($repo, { --draft }) {
   # -- phase 1: gather --
   $changes = fetch-changes($repo)              # def returns a structured result
 
