@@ -2,13 +2,15 @@
 
 **Pamcode = Pseudocode Agent Markdown.** Informal pseudocode for describing agent workflows in `SKILL.md` files.
 
+- Intuitively understandable by humans and agents, no need to read spec
+
+
 ## Markdown shell
 
 Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `###` sections.
 
 | Section | Role |
 |---|---|
-| `---` frontmatter | `name:`, `description:`, optional `disable-model-invocation` / `argument-hint` |
 | `## Input` | The `$var`s and `--flags` accepted |
 | `## Skill dependencies` | Other skills to read first, as `/path` links |
 | `## Workflow` | The `begin()` pseudocode in a code fence |
@@ -105,6 +107,5 @@ def pick-default-repo() {
 
 - **Orchestrator voice.** Top level directs; subagents do.
 - **Subagent bodies are instructions**, not calls: prose or slash commands for the spawned agent.
-- **`notify()` is fire-and-forget** — never a value to branch on.
 - **Structured returns only where a caller consumes them.**
 - **Keep it skimmable.** Read by agents and humans; one glance shows phases and gates.
