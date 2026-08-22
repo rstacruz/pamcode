@@ -35,7 +35,7 @@ Markdown first; pseudocode lives in `## Workflow`, wrapped by frontmatter and `#
 | `## Input` | The `$var`s and `--flags` accepted |
 | `## Skill dependencies` | Other skills to read first, as `/path` links |
 | `## Workflow` | The `begin()` pseudocode in a code fence |
-| `### <name>()` | One per subroutine: prose instructions or a `def` block |
+| `### <name>()` | One per subroutine: prose instructions and/or a `def` block |
 | `## Guidelines` | General guidance for writing the skill |
 
 ## Constructs
@@ -75,7 +75,7 @@ description: Teaching example — demonstrates every pamcode construct; not a ru
 
 Read first:
 
-- `/format-prose` - formatting conventions the draft must follow
+- `/format-prose` - formatting conventions the draft must follow (illustrative; substitute a real skill)
 
 ## Workflow
 
