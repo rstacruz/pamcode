@@ -2,7 +2,7 @@
   <br/>
   <br/>
   <h1>pamcode</h1>
-  <p>a spec for pseudocode for agentic workflows</p>
+  <p>grammar for pseudocode for agentic workflows</p>
   <br/>
   <br/>
   <br/>
@@ -51,6 +51,8 @@ npx skills add rstacruz/pamcode
 - ...more to come
 
 # The spec
+
+Pamcode is available as a skill ([`pamcode`](./skills/pamcode/SKILL.md)). Here's the full skill contents below.
 
 <!-- Don't edit directly; use "just sync" to update below to keep in sync with skill file -->
 <!-- spec-start -->
