@@ -136,7 +136,7 @@ begin($repo, { --draft }) {
   # -- phase 3: publish --
   $tries = 0
   loop {
-    $tries = $tries + 1
+    $tries += 1
     post digest to thread
     if ($tries == 3) { break }
   } until (posted)
@@ -169,6 +169,7 @@ Write the draft to a file and return its path.
 ## Conventions
 
 - These are suggestions, not strict rules. Deviate if it brings more clarity.
+- Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
 - Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
