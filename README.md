@@ -8,8 +8,6 @@
   <br/>
 </div>
 
-## What? Why?
-
 Look... you totally can talk to agents in pseudocode. Just paste this into Claude Code:
 
 ```
