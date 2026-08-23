@@ -96,8 +96,7 @@ Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
 
 ## Examples
 
-Every skill section and construct, annotated. The skills below are teaching
-examples — they demonstrate most constructs; they are not meant to be run.
+The skills below are teaching examples — they demonstrate most constructs; they are not meant to be run.
 
 ### daily-digest
 
@@ -202,7 +201,6 @@ begin($files) {
 - Add or remove sections as needed. Some information may be best expressed outside of Pamcode conventions.
 - Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
 - Prefer prose for describing intent.
-- Keep fan-outs bounded: `for each … in parallel` is for small, independent iterations.
 - Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
