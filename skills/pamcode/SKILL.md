@@ -37,7 +37,7 @@ Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
 | `break` | Exit the loop early | `if ($tries == 3) { break }` |
 | `for each ($x in $xs) { … }` | Repeat the body once per item in `$xs` | `for each ($pr in $prs) { summarize($pr) }` |
 | `for each ($x in $xs) in parallel { … }` | Repeat the body once per item, running iterations concurrently | `for each ($file in $files) in parallel { review($file) }` |
-| `parallel { … }` | Run each statement at the same time; separate statements with newlines or `;` | `parallel { fetch-a(); fetch-b() }` |
+| `parallel { … }` | Run each statement at the same time | `parallel { fetch-a(); fetch-b() }` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
 | `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
