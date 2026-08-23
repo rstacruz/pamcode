@@ -11,7 +11,7 @@ description: Specifies the pamcode format — pseudocode in Markdown for describ
 
 ## Markdown shell
 
-Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
+Markdown first; pseudocode appears in `## Workflow` and `###` def blocks.
 
 | Section | Role |
 |---|---|
@@ -154,5 +154,20 @@ begin($files) {
 - Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
 - Prefer prose for describing intent.
 - Keep it skimmable. Optimise to be read by agents and humans.
+
+## What Pamcode is for
+
+Pamcode excels in:
+
+- Workflows with complex branching, loops, state management
+- Multi-agent orchestration
+- Cross-skill composition
+
+Not so much for:
+
+- Simple mostly-linear workflows
+- Content-heavy specs
+
+When working to use Pamcode, push back if prose would be simpler and offer better clarity.
 
 <!-- spec-end -->
