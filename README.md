@@ -46,7 +46,7 @@ npx skills add rstacruz/pamcode
 
 ## Examples
 
-- [Example: daily digest](#example)
+- [Example: daily digest](#daily-digest)
 - [Example: autofix PRs](https://github.com/rstacruz/agentic-toolkit/blob/main/skills/atk-pr-autofix/SKILL.md)
 - ...more to come
 
@@ -82,7 +82,9 @@ Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
 | `loop { … }` | Repeat body until `break` | `loop { if ($tries == 3) { break } }` |
-| `break` | Exit the loop early | `if ($tries == 3) { break }` |
+| `for each ($x in $xs) { … }` | Repeat the body once per item in `$xs` | `for each ($pr in $prs) { summarize($pr) }` |
+| `for each ($x in $xs) in parallel { … }` | Repeat the body once per item, running iterations concurrently | `for each ($file in $files) in parallel { review($file) }` |
+| `parallel { … }` | Run each statement at the same time; join before moving on | `parallel { fetch-a() fetch-b() }` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
 | `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
@@ -91,10 +93,12 @@ Markdown first; pseudocode appears only in `## Workflow` and `###` def blocks.
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `post the draft to the thread for review` |
 
-## Example
+## Examples
 
-Every skill section and construct, annotated. The skill below is a teaching
-example — it demonstrates most constructs; it is not meant to be run.
+Every skill section and construct, annotated. The skills below are teaching
+examples — they demonstrate most constructs; they are not meant to be run.
+
+### daily-digest
 
 ````markdown
 ---
@@ -172,12 +176,48 @@ Write the draft to a file and return its path.
 
 ````
 
+### verify-changes
+
+````markdown
+---
+name: verify-changes
+description: Teaching example — demonstrates the parallel constructs; not a runnable skill.
+---
+
+## Input
+
+- `$files` - the changed files to verify
+
+## Workflow
+
+```pseudocode
+begin($files) {
+  # lint is cheap; its report reads best in order
+  for each ($file in $files) {
+    lint($file)
+  }
+
+  # tests are slow and independent — run them concurrently
+  for each ($file in $files) in parallel {
+    test($file)
+  }
+
+  # wrap up: independent tasks, all at once
+  parallel {
+    update-status()
+    notify-maintainers()
+  }
+}
+```
+````
+
 ## Conventions
 
 - These are suggestions, not strict rules. Deviate if it brings more clarity.
 - Add or remove sections as needed. Some information may be best expressed outside of Pamcode conventions.
 - Don't reach for writing pseudocode immediately. Opt for prose if it can be expressed better with words.
 - Prefer prose for describing intent.
+- Keep fan-outs bounded: `for each … in parallel` is for small, independent iterations.
 - Keep it skimmable. Optimise to be read by agents and humans.
 
 <!-- spec-end -->
