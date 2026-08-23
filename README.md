@@ -44,7 +44,7 @@ Or install it:
 npx skills add rstacruz/pamcode
 ```
 
-## Examples
+## Try these examples
 
 - [Example: daily digest](#daily-digest)
 - [Example: autofix PRs](https://github.com/rstacruz/agentic-toolkit/blob/main/skills/atk-pr-autofix/SKILL.md)
@@ -186,7 +186,7 @@ begin($files) {
   }
 
   for each ($file in $files) in parallel {
-    subagent { test($file); fix as needed }
+    subagent(verify) { test($file); fix as needed }
   }
 
   parallel {
