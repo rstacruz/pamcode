@@ -138,7 +138,7 @@ begin($files) {
   }
 
   for each ($file in $files) in parallel {
-    subagent { test($file); fix as needed }
+    subagent(verify) { test($file); fix as needed }
   }
 
   parallel {
