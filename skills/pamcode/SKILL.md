@@ -15,6 +15,7 @@ Markdown first; pseudocode appears in `## Workflow` and `###` def blocks.
 
 | Section | Role |
 |---|---|
+| `## Goals` | Definition of done — the end state that counts as done, as grouped checklists |
 | `## Input` | The `$var`s and `--flags` accepted |
 | `## Skill dependencies` | Other skills to read first, as `/path` links |
 | `## Workflow` | The `begin()` pseudocode in a `pseudocode` code fence |
@@ -74,6 +75,15 @@ The skills below are teaching examples — they demonstrate most constructs; the
 name: daily-digest
 description: Teaching example — demonstrates most pamcode constructs; not a runnable skill.
 ---
+
+## Goals
+
+Definition of done: a **digest of Git activity**, posted to the thread.
+
+- Content:
+  - [ ] Grouped by theme, one bullet per commit
+- Operational:
+  - [ ] Delivered to the right thread, nothing double-posted
 
 ## Input
 
