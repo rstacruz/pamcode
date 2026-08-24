@@ -24,24 +24,41 @@ Markdown first; pseudocode appears in `## Workflow` and `###` def blocks.
 
 ## Constructs
 
+Routines:
+
 | Construct | Meaning | Example |
 |---|---|---|
 | `begin($args) { … }` | Workflow entry point | `begin($request) {` |
 | `def name($args) { … }` | Subroutine, usually returning a structured result | `def plan($request) {` |
 | `name($args)` | Invoke a routine defined elsewhere | `fetch-changes()` |
-| `` `cmd` `` | Run a shell command; yields its stdout | `` `git log --oneline` `` |
-| `$var` | Parameter or state | `$request` |
+| `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
+| `abort "reason"` | Stop the workflow with a failure reason | `abort "couldn't post after 3 tries"` |
+
+Control flow:
+
+| Construct | Meaning | Example |
+|---|---|---|
 | `if (cond) { … } else { … }` | Branch on category, effort, flags | `if (category == 'code-change') {` |
 | `loop { … } until (cond)` | Repeat body until condition holds | `loop { retry() } until (verified)` |
 | `loop { … }` | Repeat body until `break` | `loop { if ($tries == 3) { break } }` |
 | `break` | Exit the loop early | `if ($tries == 3) { break }` |
 | `for each ($x in $xs) { … }` | Repeat the body once per item in `$xs` | `for each ($pr in $prs) { summarize($pr) }` |
+
+Concurrency & delegation:
+
+| Construct | Meaning | Example |
+|---|---|---|
 | `for each ($x in $xs) in parallel { … }` | Repeat the body once per item, running iterations concurrently | `for each ($file in $files) in parallel { review($file) }` |
 | `parallel { … }` | Run each statement at the same time | `parallel { fetch-a(); fetch-b() }` |
 | `subagent(tag) { … }` | Fork a subagent; body is its instructions | `subagent(fork) {` |
 | `/command()` / `/command args` | Invoke another skill | `/polish-plan()`, `/loop 15m` |
-| `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
-| `abort "reason"` | Stop the workflow with a failure reason | `abort "couldn't post after 3 tries"` |
+
+Actions & data:
+
+| Construct | Meaning | Example |
+|---|---|---|
+| `` `cmd` `` | Run a shell command; yields its stdout | `` `git log --oneline` `` |
+| `$var` | Parameter or state | `$request` |
 | `# comment` / `# -- banner --` | Notes; section banners | `# -- plan phase --` |
 | `--flag` | CLI-style option that alters flow | `--yolo` |
 | plain prose | A step described in words | `post the draft to the thread for review` |
