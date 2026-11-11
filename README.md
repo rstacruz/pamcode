@@ -59,16 +59,53 @@ Pamcode is available as a skill ([`pamcode`](./skills/pamcode/SKILL.md)). Here's
 
 ## Markdown shell
 
-Markdown first; pseudocode appears in `## Workflow` and `###` def blocks.
+Markdown first; pseudocode appears in `## Workflow` (optional) and `###` def blocks.
 
 | Section | Role |
 |---|---|
-| `## Goals` | Definition of done — the end state that counts as done, as grouped checklists |
+| `## Goals` | Definition of done — the end state that counts as done, as grouped checklists. The entry point when `## Workflow` is omitted |
 | `## Input` | The `$var`s and `--flags` accepted |
 | `## Skill dependencies` | Other skills to read first, as `/path` links |
-| `## Workflow` | The `begin()` pseudocode in a `pseudocode` code fence |
-| `### <name>()` | One per subroutine: prose instructions and/or a `def` block |
+| `## Workflow` | Optional. The `begin()` pseudocode in a `pseudocode` code fence — include when call order matters |
+| `### <name>()` | One per subroutine: prose instructions and/or a `def` block, with its contract |
 | `## Guidelines` | General guidance for writing the skill |
+
+
+## Workflow is optional
+
+`## Workflow` is the explicit form. Omit it when `## Goals` plus the `### <name>()` contracts already determine the work — the agent infers the order and calls the routines like tools.
+
+| Shape | Use when | Sections |
+|---|---|---|
+| Explicit | order, branching, loops, retries, or parallel fan-out matter | `## Goals` + `## Workflow` + `### <name>()` |
+| Toolbox | the Goals state the end state; routines compose in an obvious order | `## Goals` + `### <name>()` |
+
+In a toolbox skill, the **Goals are the entry point**. For inference to work:
+
+- Goals must be checkable — the agent can tell when each item holds.
+- Each `### <name>()` must be single-purpose, with its input and result stated.
+- Names must suggest their role (`gather-prs()` before `fix-pr()`), not their implementation.
+
+Example — no `## Workflow`, still fully specified:
+
+```markdown
+## Goals
+
+- [ ] All open PRs have green checks
+- [ ] Fixes are pushed, not just reported
+
+### gather-prs()
+
+- List open PRs with their failing check names and logs.
+- Returns `{ prs: [{ number, failing }] }`.
+
+### fix-pr($pr)
+
+- Reproduce the failures, fix, push, then wait for checks.
+- Returns `{ number, fixed, remaining }`.
+```
+
+The agent loops `gather-prs()` → `fix-pr()` until every Goal holds. Add `## Workflow` when the order is not obvious or a wrong order is expensive; even then, keep routine detail in the subroutines, not the workflow.
 
 
 ## Constructs
@@ -77,7 +114,7 @@ Routines:
 
 | Construct | Meaning | Example |
 |---|---|---|
-| `begin($args) { … }` | Workflow entry point | `begin($request) {` |
+| `begin($args) { … }` | Workflow entry point (only with `## Workflow`) | `begin($request) {` |
 | `def name($args) { … }` | Subroutine, usually returning a structured result | `def plan($request) {` |
 | `name($args)` | Invoke a routine defined elsewhere | `fetch-changes()` |
 | `return { field: value, ... }` / `return <value>` | Structured or plain result passed up | `return { posted: true }`, `return "nothing new"` |
@@ -237,10 +274,11 @@ Pamcode excels in:
 - Workflows with complex branching, loops, state management
 - Multi-agent orchestration
 - Cross-skill composition
+- Toolbox skills: Goals plus routine contracts, with the model choosing the call order
 
 Not so much for:
 
-- Simple mostly-linear workflows
+- One-off tasks with no reusable routines to name
 - Content-heavy specs
 
 When working to use Pamcode, push back if prose would be simpler and offer better clarity.
